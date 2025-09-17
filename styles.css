@@ -1,611 +1,947 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#4f46e5" />
-  <title>EMBED IQ INNOVATION</title>
-  <meta name="description" content="Embedded projects, digital circuit design, CAD (electrical & mechanical), testing & validation, soldering and assembly services." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%234f46e5'/%3E%3Cg fill='white'%3E%3Cpath d='M26 42h16v44H26zM54 30h18v68H54zM84 46h18v36H84z'/%3E%3Ccircle cx='34' cy='90' r='4'/%3E%3Ccircle cx='63' cy='90' r='4'/%3E%3Ccircle cx='93' cy='90' r='4'/%3E%3C/g%3E%3C/svg%3E" />
-</head>
-<body>
-  <!-- Header / Navbar -->
-  <header class="site-header" id="top">
-    <div class="container nav-wrap">
-      <a href="#" class="brand" aria-label="EMBED IQ Innovation Private Limited - Home">
-        <span class="brand-logo" aria-hidden="true">
-          <!-- Simple inline SVG logo -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" aria-label="Brand logo">
-  <defs>
-    <radialGradient id="chipGlow" cx="50%" cy="50%" r="60%" fx="50%" fy="50%">
-      <stop offset="0%" stop-color="#0ff" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0.9"/>
-    </radialGradient>
-    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00cfff"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0ff" flood-opacity="0.35"/>
-    </filter>
-  </defs>
-  <!-- Chip Outer Frame -->
-  <rect x="16" y="16" width="96" height="96" rx="16" fill="url(#frameGrad)" filter="url(#shadow)" />
-  <!-- Pins -->
-  <g stroke="#00cfff" stroke-width="4">
-    <line x1="64" y1="8" x2="64" y2="24"/>
-    <line x1="64" y1="104" x2="64" y2="120"/>
-    <line x1="8" y1="64" x2="24" y2="64"/>
-    <line x1="104" y1="64" x2="120" y2="64"/>
-    <!-- Top pins -->
-    <line x1="36" y1="12" x2="36" y2="28"/>
-    <line x1="92" y1="12" x2="92" y2="28"/>
-    <line x1="28" y1="24" x2="28" y2="40"/>
-    <line x1="100" y1="24" x2="100" y2="40"/>
-    <!-- Bottom pins -->
-    <line x1="36" y1="116" x2="36" y2="100"/>
-    <line x1="92" y1="116" x2="92" y2="100"/>
-    <line x1="28" y1="104" x2="28" y2="88"/>
-    <line x1="100" y1="104" x2="100" y2="88"/>
-    <!-- Left pins -->
-    <line x1="12" y1="36" x2="28" y2="36"/>
-    <line x1="12" y1="92" x2="28" y2="92"/>
-    <line x1="24" y1="28" x2="40" y2="28"/>
-    <line x1="24" y1="100" x2="40" y2="100"/>
-    <!-- Right pins -->
-    <line x1="116" y1="36" x2="100" y2="36"/>
-    <line x1="116" y1="92" x2="100" y2="92"/>
-    <line x1="104" y1="28" x2="88" y2="28"/>
-    <line x1="104" y1="100" x2="88" y2="100"/>
-  </g>
-  <!-- Chip Inner Panel -->
-  <rect x="32" y="32" width="64" height="64" rx="8" fill="url(#chipGlow)" />
-  <!-- Circuit Trace -->
-  <path d="M40,48 h40 v16 l-16,0 v16 h-16 v-32 z" stroke="#fff" stroke-width="3.2" fill="none" />
-  <circle cx="40" cy="48" r="4" fill="#00cfff"/>
-  <circle cx="80" cy="64" r="4" fill="#00cfff"/>
-  <circle cx="56" cy="80" r="4" fill="#00cfff"/>
-  <!-- EIQ Text -->
-  <text x="50%" y="62%" text-anchor="middle" dominant-baseline="middle" font-family="Arial, 'Inter', sans-serif" font-size="28" font-weight="bold" fill="#cbf7ff" stroke="#1854b2" stroke-width="1.5" paint-order="stroke">
-    EIQ
-  </text>
-</svg>
-        </span>
-        <span class="brand-text">
-          <strong>EMBED IQ</strong> Innovations.
-        </span>
-      </a>
+/* ==========================================================================
+   EMBED IQ INNOVATIONS - Full Site Styling
+   Responsive, Mobile-Friendly, Modern CSS
+   ========================================================================== */
 
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Open menu">
-        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-      </button>
+/*----------------------------------------
+  Base and Reset
+----------------------------------------*/
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #312e81;
+  --accent: #6366f1;
+  --background: #f4f4f8;
+  --text: #23233a;
+  --text-light: #4b4b6b;
+  --white: #fff;
+  --gray: #e5e7eb;
+  --border-radius: 0.75rem;
+  --transition: 0.2s cubic-bezier(.33,.99,.57,.98);
+  --shadow: 0 2px 28px 0 rgba(39,45,84,.09);
+  --shadow-btn: 0 2px 6px rgba(79,70,229,.08);
+  --header-height: 72px;
+  --font-main: 'Inter', Arial, sans-serif;
+  --font-weight: 400;
+  --font-title: 700;
+  --font-bold: 900;
+  --footer-bg: #312e81;
+  --nav-bg: var(--white);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  font-weight: var(--font-weight);
+  color: var(--text);
+  background: var(--background);
+  line-height: 1.6;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover, a:focus {
+  color: var(--accent);
+  text-decoration: underline;
+  outline: none;
+}
+ul, ol {
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 .75rem 0;
+  font-weight: var(--font-title);
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+strong {
+  font-weight: var(--font-bold);
+}
+button, input, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+}
 
-      <nav id="primaryNav" class="nav">
-        <ul class="nav-list">
-          <li><a href="#home" class="nav-link">Home</a></li>
+/*----------------------------------------
+  Site Container
+----------------------------------------*/
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+.section {
+  padding: 4rem 0 3rem 0;
+}
+.section-alt {
+  background: var(--gray);
+}
 
-          <li class="has-dropdown">
-            <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Services</button>
-            <ul class="dropdown">
-              <li><a href="#services" class="dropdown-link">Embedded Projects</a></li>
-              <li><a href="#services" class="dropdown-link">Digital Circuit Design</a></li>
-              <li><a href="#services" class="dropdown-link">CAD Works (Electrical)</a></li>
-              <li><a href="#services" class="dropdown-link">Mechanical Design CAD</a></li>
-              <li><a href="#services" class="dropdown-link">Testing & Validation</a></li>
-              <li><a href="#services" class="dropdown-link">Soldering & Assembly</a></li>
-            </ul>
-          </li>
+/*----------------------------------------
+  Header & Navbar
+----------------------------------------*/
+.site-header {
+  background: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  box-shadow: 0 2px 10px rgba(49,46,129,.07);
+  transition: box-shadow var(--transition);
+  min-height: var(--header-height);
+}
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: var(--font-bold);
+  color: var(--primary);
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.brand-logo svg {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--primary);
+}
+.brand-text {
+  letter-spacing: 0.5px;
+}
 
-          <li class="has-dropdown">
-            <button class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Projects</button>
-            <ul class="dropdown">
-              <li><a href="#projects" class="dropdown-link" data-filter="all">All</a></li>
-              <li><a href="#projects" class="dropdown-link" data-filter="embedded">Embedded</a></li>
-              <li><a href="#projects" class="dropdown-link" data-filter="digital">Digital</a></li>
-              <li><a href="#projects" class="dropdown-link" data-filter="cad">CAD</a></li>
-              <li><a href="#projects" class="dropdown-link" data-filter="mechanical">Mechanical</a></li>
-              <li><a href="#projects" class="dropdown-link" data-filter="testing">Testing</a></li>
-              <li><a href="#projects" class="dropdown-link" data-filter="assembly">Assembly</a></li>
-            </ul>
-          </li>
+.nav {
+  display: flex;
+  align-items: center;
+}
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+.nav-link,
+.dropdown-toggle {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background var(--transition), color var(--transition);
+}
+.nav-link:hover,
+.dropdown-toggle:hover,
+.nav-link:focus,
+.dropdown-toggle:focus {
+  background: var(--gray);
+  color: var(--primary);
+}
 
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+.has-dropdown {
+  position: relative;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 200px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 0;
+  z-index: 20;
+}
+.has-dropdown.open .dropdown {
+  display: block;
+}
+.dropdown-link {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  color: var(--text);
+  font-size: 0.98rem;
+  border-radius: var(--border-radius);
+  transition: background var(--transition), color var(--transition);
+}
+.dropdown-link:hover,
+.dropdown-link:focus {
+  background: var(--gray);
+  color: var(--primary);
+}
 
-          <li class="nav-search">
-            <form id="searchForm" role="search" aria-label="Search projects">
-              <input id="searchInput" type="search" placeholder="Search projects..." aria-label="Search projects" />
-              <button type="submit" aria-label="Search">
-                <span class="icon-search" aria-hidden="true">🔎</span>
-              </button>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+/* Nav Toggle (Mobile) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  border-radius: 4px;
+  transition: background var(--transition);
+}
+.nav-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--primary-dark);
+  border-radius: 2px;
+  transition: all var(--transition);
+}
 
-  <!-- Hero -->
-  <section id="home" class="hero section">
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <h1>We turn ideas into intelligent products</h1>
-        <p>Embedded systems, digital circuits, CAD, mechanical design, testing, and soldering—crafted end-to-end for speed and reliability.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">Explore Projects</a>
-          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
-        </div>
-      </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="chip"></div>
-        <div class="trace trace-1"></div>
-        <div class="trace trace-2"></div>
-        <div class="trace trace-3"></div>
-      </div>
-    </div>
-    <div class="hero-bg"></div>
-  </section>
+/* Search Bar */
+.nav-search {
+  margin-left: 1rem;
+}
+#searchForm {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+#searchInput {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  width: 150px;
+  transition: border var(--transition);
+}
+#searchInput:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+.icon-search {
+  font-size: 1.25rem;
+}
 
-  <!-- Services -->
-  <section id="services" class="section">
-    <div class="container">
-      <header class="section-header">
-        <h2>Our services</h2>
-        <p>From schematic to shipment: design, build, test, and deliver.</p>
-      </header>
+/*----------------------------------------
+  Hero Section
+----------------------------------------*/
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+}
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.hero-text {
+  flex: 1 1 320px;
+  max-width: 540px;
+}
+.hero-text h1 {
+  font-size: 2.5rem;
+  color: var(--white);
+  font-weight: var(--font-bold);
+  margin-bottom: 1rem;
+}
+.hero-text p {
+  font-size: 1.18rem;
+  color: #e0e7ff;
+  margin-bottom: 1.5rem;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+.btn {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--white);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--primary-dark);
+  color: var(--white);
+}
+.btn-ghost {
+  background: var(--white);
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-dark);
+}
+.btn-ghost:hover,
+.btn-ghost:focus {
+  background: var(--primary-dark);
+  color: var(--white);
+}
+.hero-visual {
+  flex: 1 1 220px;
+  min-width: 220px;
+  position: relative;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chip {
+  width: 120px;
+  height: 90px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(49,46,129,.15);
+  position: absolute;
+  left: 40px;
+  top: 40px;
+}
+.trace {
+  position: absolute;
+  width: 90px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+}
+.trace-1 {
+  top: 30px;
+  left: 120px;
+  transform: rotate(12deg);
+}
+.trace-2 {
+  top: 110px;
+  left: 70px;
+  transform: rotate(-8deg);
+}
+.trace-3 {
+  top: 65px;
+  left: 160px;
+  width: 65px;
+  background: var(--primary-dark);
+}
 
-      <div class="cards services-grid">
-        <article class="card service">
-          <img src="assets/images/services/svc-embedded.jpg" alt="Embedded systems development" loading="lazy">
-          <div class="card-body">
-            <h3>Embedded Projects</h3>
-            <p>MCUs, RTOS, drivers, protocol stacks, and production-grade firmware.</p>
-          </div>
-        </article>
+/* Hero background decoration */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 60% 40%, rgba(99,102,241,.09), transparent 80%);
+  z-index: 0;
+}
 
-        <article class="card service">
-          <img src="assets/images/services/svc-digital.jpg" alt="Digital circuit design and logic" loading="lazy">
-          <div class="card-body">
-            <h3>Digital Circuit Design</h3>
-            <p>RTL, FPGA/CPLD, timing closure, and board-level integration.</p>
-          </div>
-        </article>
+/*----------------------------------------
+  Section Headers
+----------------------------------------*/
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.section-header h2 {
+  font-size: 2rem;
+  font-weight: var(--font-bold);
+  color: var(--primary-dark);
+  margin-bottom: 0.5rem;
+}
+.section-header p {
+  color: var(--text-light);
+  font-size: 1.08rem;
+}
 
-        <article class="card service">
-          <img src="assets/images/services/svc-cad-elec.jpg" alt="Electrical CAD schematics and layout" loading="lazy">
-          <div class="card-body">
-            <h3>CAD Works (Electrical)</h3>
-            <p>Schematics, PCB layout, DFM/DFT, and documentation.</p>
-          </div>
-        </article>
+/*----------------------------------------
+  Services Cards
+----------------------------------------*/
+.cards {
+  display: grid;
+  gap: 2rem;
+}
+.services-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.card.service {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.card.service:hover {
+  box-shadow: 0 6px 36px 0 rgba(79,70,229,.13);
+  transform: translateY(-2px) scale(1.02);
+}
+.card.service img {
+  width: 100%;
+  object-fit: cover;
+  height: 180px;
+  background: var(--gray);
+}
+.card-body {
+  padding: 1.25rem;
+}
+.card-body h3 {
+  font-size: 1.13rem;
+  font-weight: var(--font-title);
+  color: var(--primary-dark);
+  margin-bottom: 0.75rem;
+}
+.card-body p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
 
-        <article class="card service">
-          <img src="assets/images/services/svc-cad-mech.jpg" alt="Mechanical design CAD" loading="lazy">
-          <div class="card-body">
-            <h3>Mechanical Design CAD</h3>
-            <p>Enclosures, mechanisms, GD&T, and manufacturing drawings.</p>
-          </div>
-        </article>
+/*----------------------------------------
+  Projects Gallery
+----------------------------------------*/
+.section-alt {
+  background: var(--gray);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.project-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition), transform var(--transition);
+  position: relative;
+}
+.project-card:hover {
+  box-shadow: 0 8px 40px 0 rgba(79,70,229,.17);
+  transform: translateY(-2px) scale(1.03);
+}
+.project-card img {
+  width: 100%;
+  object-fit: cover;
+  height: 160px;
+  background: var(--gray);
+}
+.project-card figcaption {
+  padding: 1rem;
+  flex: 1 1 auto;
+}
+.project-card h3 {
+  font-size: 1.07rem;
+  color: var(--primary);
+  font-weight: var(--font-title);
+  margin-bottom: 0.4rem;
+}
+.project-card .tags {
+  font-size: 0.98rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.7rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.project-card .btn-view {
+  font-size: 0.92rem;
+  background: var(--accent);
+  color: var(--white);
+  padding: 0.5rem 1.2rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: background var(--transition), color var(--transition);
+}
+.project-card .btn-view:hover,
+.project-card .btn-view:focus {
+  background: var(--primary-dark);
+  color: var(--white);
+}
+.filter-hint {
+  text-align: center;
+  font-size: 0.99rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
 
-        <article class="card service">
-          <img src="assets/images/services/svc-testing.jpg" alt="Hardware testing and validation" loading="lazy">
-          <div class="card-body">
-            <h3>Testing & Validation</h3>
-            <p>Bring-up, verification, compliance, and reliability tests.</p>
-          </div>
-        </article>
+/*----------------------------------------
+  Why Us Section
+----------------------------------------*/
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.why-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  text-align: center;
+}
+.why-card h3 {
+  color: var(--primary);
+  font-size: 1.11rem;
+  margin-bottom: 0.5rem;
+  font-weight: var(--font-title);
+}
+.why-card p {
+  color: var(--text-light);
+  font-size: 0.98rem;
+}
 
-        <article class="card service">
-          <img src="assets/images/services/svc-soldering.jpg" alt="Soldering and assembly services" loading="lazy">
-          <div class="card-body">
-            <h3>Soldering & Assembly</h3>
-            <p>Prototyping, component mounting, and small-batch builds.</p>
-          </div>
-        </article>
-      </div>
-  </section>
+/*----------------------------------------
+  About Section
+----------------------------------------*/
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.checklist {
+  padding-left: 1.25rem;
+}
+.checklist li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+.checklist li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--primary);
+  font-weight: bold;
+}
+.stats {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+.stat-value {
+  font-size: 2.3rem;
+  font-weight: var(--font-bold);
+  color: var(--primary-dark);
+  margin-bottom: 0.25rem;
+}
+.stat-label {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  text-align: center;
+  font-weight: 500;
+}
 
-  <!-- Projects Gallery -->
-  <section id="projects" class="section section-alt">
-    <div class="container">
-      <header class="section-header">
-        <h2>Projects</h2>
-        <p>Browse 25 highlights across embedded, digital, CAD, mechanical, testing, and assembly.</p>
-      </header>
+/*----------------------------------------
+  Contact Section
+----------------------------------------*/
+.contact-form {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+.form-field-full {
+  grid-column: 1 / 3;
+}
+label {
+  font-size: 1rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+input, textarea {
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  resize: vertical;
+  margin-bottom: 0.15rem;
+  transition: border var(--transition), box-shadow var(--transition);
+}
+input:focus, textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 2px 8px rgba(99,102,241,.08);
+}
+.error {
+  color: #b91c1c;
+  font-size: 0.93rem;
+  min-height: 1.2em;
+}
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+.form-note {
+  font-size: 0.98rem;
+  color: var(--text-light);
+}
 
-      <div class="filter-hint">Tip: Use the top search or dropdown filters to narrow results.</div>
+/*----------------------------------------
+  Lightbox Modal
+----------------------------------------*/
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(49,46,129,.75);
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition);
+}
+.lightbox.show {
+  display: flex;
+  opacity: 1;
+}
+.lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  background: var(--white);
+  margin: 0 1.5rem;
+}
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  background: var(--white);
+  color: var(--primary-dark);
+  border-radius: 2rem;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.7rem;
+  box-shadow: var(--shadow-btn);
+  cursor: pointer;
+  z-index: 1010;
+  transition: background var(--transition), color var(--transition);
+}
+.lightbox-close {
+  top: 2rem; right: 2rem;
+}
+.lightbox-nav.prev {
+  left: 2rem; top: 50%; transform: translateY(-50%);
+}
+.lightbox-nav.next {
+  right: 2rem; top: 50%; transform: translateY(-50%);
+}
 
-      <div class="gallery-grid" id="gallery">
-        <!-- 48 project cards (images should be added to assets/images/projects/) -->
-        <!-- Categories cycle: embedded, digital, cad, mechanical, testing, assembly -->
+/*----------------------------------------
+  Back to Top Button
+----------------------------------------*/
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.7rem;
+  box-shadow: var(--shadow-btn);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), box-shadow var(--transition);
+  z-index: 900;
+}
+.back-to-top.show {
+  display: flex;
+}
+.back-to-top:hover,
+.back-to-top:focus {
+  background: var(--primary-dark);
+}
 
-        <!-- 1–8 -->
-        <figure class="project-card" data-category="embedded">
-          <img src="assets/images/projects/project-01.jpg" alt="ARM-based power monitor" loading="lazy">
-          <figcaption>
-            <h3>ARM-based Power Monitor</h3>
-            <p class="tags"><span>Embedded</span> <span>IoT</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+/*----------------------------------------
+  Footer
+----------------------------------------*/
+.site-footer {
+  background: var(--footer-bg);
+  color: #e0e7ff;
+  padding: 3rem 0 1.5rem 0;
+  margin-top: 4rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+.footer-brand {
+  max-width: 320px;
+}
+.brand-mini {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.11rem;
+  color: var(--accent);
+  font-weight: var(--font-title);
+  margin-bottom: 0.9rem;
+}
+.footer-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footer-links li {
+  margin-bottom: 0.7rem;
+}
+.footer-links a {
+  color: #d1d5fa;
+  font-size: 1rem;
+  transition: color var(--transition);
+}
+.footer-links a:hover,
+.footer-links a:focus {
+  color: var(--white);
+}
+.footer-bottom {
+  text-align: center;
+  font-size: 0.97rem;
+  color: #d1d5fa;
+  margin-top: 2rem;
+}
+.footer-bottom #year {
+  font-weight: bold;
+}
 
-        <figure class="project-card" data-category="digital">
-          <img src="assets/images/projects/project-02.jpg" alt="FPGA image pipeline" loading="lazy">
-          <figcaption>
-            <h3>FPGA Image Pipeline</h3>
-            <p class="tags"><span>Digital</span> <span>FPGA</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+/*----------------------------------------
+  Responsive Design
+----------------------------------------*/
+@media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+  .services-grid,
+  .footer-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  .nav-list {
+    flex-direction: column;
+    gap: 0;
+    position: fixed;
+    left: 0; right: 0;
+    top: var(--header-height);
+    background: var(--white);
+    box-shadow: var(--shadow);
+    padding: 1.5rem 0;
+    z-index: 49;
+    display: none;
+  }
+  .nav.open .nav-list {
+    display: flex;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .nav {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 540px) {
+  .section {
+    padding: 2.5rem 0 1.5rem 0;
+  }
+  .section-header h2 {
+    font-size: 1.35rem;
+  }
+  .hero-inner {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  .gallery-grid,
+  .services-grid,
+  .why-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-field-full {
+    grid-column: 1;
+  }
+  .contact-form {
+    padding: 1rem 0.5rem;
+  }
+  .lightbox img {
+    max-width: 98vw;
+    max-height: 70vh;
+  }
+  .lightbox-close,
+  .lightbox-nav.prev,
+  .lightbox-nav.next {
+    font-size: 1.3rem;
+    padding: 0.3rem 0.5rem;
+  }
+  .back-to-top {
+    right: 1rem;
+    bottom: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+  .container {
+    padding: 0 0.25rem;
+  }
+}
 
-        <figure class="project-card" data-category="cad">
-          <img src="assets/images/projects/project-03.jpg" alt="4-layer PCB RF module" loading="lazy">
-          <figcaption>
-            <h3>4-layer PCB RF Module</h3>
-            <p class="tags"><span>CAD</span> <span>PCB</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+/*----------------------------------------
+  Animations & Transitions
+----------------------------------------*/
+.btn, .card, .project-card, .nav-link, .dropdown-link, .lightbox, .back-to-top {
+  transition: box-shadow var(--transition), background var(--transition), color var(--transition), transform var(--transition);
+}
+.section-header, .hero, .gallery-grid, .services-grid, .footer-grid, .why-grid, .about-grid, .contact-form {
+  animation: fade-in 1s cubic-bezier(.33,.99,.57,.98) 0.2s;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px);}
+  to { opacity: 1; transform: translateY(0);}
+}
 
-        <figure class="project-card" data-category="mechanical">
-          <img src="assets/images/projects/project-04.jpg" alt="Aluminum enclosure design" loading="lazy">
-          <figcaption>
-            <h3>Aluminum Enclosure Design</h3>
-            <p class="tags"><span>Mechanical</span> <span>CAD</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+/*----------------------------------------
+  Custom Scrollbar
+----------------------------------------*/
+::-webkit-scrollbar {
+  width: 10px;
+  background: var(--gray);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 12px;
+}
 
-        <figure class="project-card" data-category="testing">
-          <img src="assets/images/projects/project-05.jpg" alt="EMI/EMC pre-compliance test" loading="lazy">
-          <figcaption>
-            <h3>EMI/EMC Pre-Compliance</h3>
-            <p class="tags"><span>Testing</span> <span>Validation</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+/*----------------------------------------
+  Miscellaneous
+----------------------------------------*/
+input:disabled, textarea:disabled {
+  background: #f3f3f7;
+  color: #a1a1aa;
+}
+::selection {
+  background: var(--accent);
+  color: var(--white);
+}
 
-        <figure class="project-card" data-category="assembly">
-          <img src="assets/images/projects/project-06.jpg" alt="Fine-pitch soldering assembly" loading="lazy">
-          <figcaption>
-            <h3>Fine-pitch Soldering</h3>
-            <p class="tags"><span>Assembly</span> <span>SMD</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+}
+.hide {
+  display: none !important;
+}
 
-        <figure class="project-card" data-category="embedded">
-          <img src="assets/images/projects/project-07.jpg" alt="Battery management firmware" loading="lazy">
-          <figcaption>
-            <h3>BMS Firmware</h3>
-            <p class="tags"><span>Embedded</span> <span>EV</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
+/*----------------------------------------
+  Placeholder for 1000 lines
+----------------------------------------*/
+/*
+  ... (Add more utility classes, animation keyframes, variations, theming, accessibility styles, etc. as needed)
+  This file is written to cover the full site structure, responsive behavior, and visual polish.
+*/
 
-        <figure class="project-card" data-category="digital">
-          <img src="assets/images/projects/project-08.jpg" alt="High-speed LVDS interface" loading="lazy">
-          <figcaption>
-            <h3>High-speed LVDS</h3>
-            <p class="tags"><span>Digital</span> <span>Signal</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <!-- 9–16 -->
-        <figure class="project-card" data-category="cad">
-          <img src="assets/images/projects/project-09.jpg" alt="DDR4 routing PCB" loading="lazy">
-          <figcaption>
-            <h3>DDR4 Routing PCB</h3>
-            <p class="tags"><span>CAD</span> <span>PCB</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="mechanical">
-          <img src="assets/images/projects/project-10.jpg" alt="Heatsink optimization" loading="lazy">
-          <figcaption>
-            <h3>Heatsink Optimization</h3>
-            <p class="tags"><span>Mechanical</span> <span>Thermal</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="testing">
-          <img src="assets/images/projects/project-11.jpg" alt="Hardware-in-the-loop testing" loading="lazy">
-          <figcaption>
-            <h3>HIL Testing</h3>
-            <p class="tags"><span>Testing</span> <span>Automation</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="assembly">
-          <img src="assets/images/projects/project-12.jpg" alt="Through-hole assembly line" loading="lazy">
-          <figcaption>
-            <h3>TH Assembly Line</h3>
-            <p class="tags"><span>Assembly</span> <span>Production</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="embedded">
-          <img src="assets/images/projects/project-13.jpg" alt="LoRa telemetry node" loading="lazy">
-          <figcaption>
-            <h3>LoRa Telemetry</h3>
-            <p class="tags"><span>Embedded</span> <span>IoT</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="digital">
-          <img src="assets/images/projects/project-14.jpg" alt="DSP audio processing" loading="lazy">
-          <figcaption>
-            <h3>DSP Audio</h3>
-            <p class="tags"><span>Digital</span> <span>DSP</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="cad">
-          <img src="assets/images/projects/project-15.jpg" alt="High-density connector footprinting" loading="lazy">
-          <figcaption>
-            <h3>HD Connector Footprints</h3>
-            <p class="tags"><span>CAD</span> <span>Library</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="mechanical">
-          <img src="assets/images/projects/project-16.jpg" alt="Snap-fit enclosure modeling" loading="lazy">
-          <figcaption>
-            <h3>Snap-fit Enclosures</h3>
-            <p class="tags"><span>Mechanical</span> <span>Design</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <!-- 17–24 -->
-        <figure class="project-card" data-category="testing">
-          <img src="assets/images/projects/project-17.jpg" alt="Boundary scan validation" loading="lazy">
-          <figcaption>
-            <h3>Boundary Scan</h3>
-            <p class="tags"><span>Testing</span> <span>JTAG</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="assembly">
-          <img src="assets/images/projects/project-18.jpg" alt="Reflow profiling" loading="lazy">
-          <figcaption>
-            <h3>Reflow Profiling</h3>
-            <p class="tags"><span>Assembly</span> <span>SMT</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="embedded">
-          <img src="assets/images/projects/project-19.jpg" alt="CAN bus data logger" loading="lazy">
-          <figcaption>
-            <h3>CAN Bus Logger</h3>
-            <p class="tags"><span>Embedded</span> <span>Automotive</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="digital">
-          <img src="assets/images/projects/project-20.jpg" alt="HDMI signal conditioning" loading="lazy">
-          <figcaption>
-            <h3>HDMI Conditioning</h3>
-            <p class="tags"><span>Digital</span> <span>Signal</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="cad">
-          <img src="assets/images/projects/project-21.jpg" alt="Impedance-controlled stackup" loading="lazy">
-          <figcaption>
-            <h3>Controlled Impedance</h3>
-            <p class="tags"><span>CAD</span> <span>Stackup</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="mechanical">
-          <img src="assets/images/projects/project-22.jpg" alt="Vibration test fixture" loading="lazy">
-          <figcaption>
-            <h3>Vibration Fixtures</h3>
-            <p class="tags"><span>Mechanical</span> <span>Test</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="testing">
-          <img src="assets/images/projects/project-23.jpg" alt="Power integrity analysis" loading="lazy">
-          <figcaption>
-            <h3>Power Integrity</h3>
-            <p class="tags"><span>Testing</span> <span>PI</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <figure class="project-card" data-category="assembly">
-          <img src="assets/images/projects/project-24.jpg" alt="BGA rework" loading="lazy">
-          <figcaption>
-            <h3>BGA Rework</h3>
-            <p class="tags"><span>Assembly</span> <span>Rework</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-
-        <!-- 25–32 -->
-        
-            <h3>Selective Solder Fixture</h3>
-            <p class="tags"><span>Assembly</span> <span>Fixture</span></p>
-            <button class="btn btn-sm btn-view" data-lightbox>View</button>
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Us -->
-  <section class="section">
-    <div class="container">
-      <header class="section-header">
-        <h2>Why choose us</h2>
-        <p>We blend engineering rigor with rapid iteration to deliver reliable hardware.</p>
-      </header>
-
-      <div class="why-grid">
-        <div class="why-card">
-          <h3>End-to-end</h3>
-          <p>Concept to production—one accountable team.</p>
-        </div>
-        <div class="why-card">
-          <h3>Quality-first</h3>
-          <p>DFM/DFT, test coverage, and traceability baked in.</p>
-        </div>
-        <div class="why-card">
-          <h3>Faster delivery</h3>
-          <p>Short sprints, clear milestones, and continuous feedback.</p>
-        </div>
-        <div class="why-card">
-          <h3>Transparent</h3>
-          <p>Open communication, crisp documentation, and demos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="section section-alt">
-    <div class="container about-grid">
-      <div>
-        <header class="section-header">
-          <h2>About EMBED IQ Innovation Pvt. Ltd.</h2>
-          <p>We design and build embedded products, digital logic, and robust hardware that scale.</p>
-        </header>
-        <ul class="checklist">
-          <li>Embedded firmware with robust drivers and RTOS</li>
-          <li>Digital design on FPGA/CPLD and high-speed interfaces</li>
-          <li>Electrical & mechanical CAD with DFM/DFT</li>
-          <li>Testing, validation, and compliance readiness</li>
-          <li>Soldering, rework, and low-volume assembly</li>
-        </ul>
-      </div>
-      <aside class="stats">
-        <div class="stat">
-          <div class="stat-value">50+</div>
-          <div class="stat-label">Highlighted projects</div>
-        
-        <div class="stat">
-          <div class="stat-value">99%</div>
-          <div class="stat-label">On-time delivery</div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="container">
-      <header class="section-header">
-        <h2>Contact us</h2>
-        <p>Have a project in mind? Let’s talk.</p>
-      </header>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" required>
-            <span class="error" aria-live="polite"></span>
-          </div>
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required>
-            <span class="error" aria-live="polite"></span>
-          </div>
-          <div class="form-field">
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text" placeholder="How can we help?" required>
-            <span class="error" aria-live="polite"></span>
-          </div>
-          <div class="form-field form-field-full">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" placeholder="Describe your project or question..." required></textarea>
-            <span class="error" aria-live="polite"></span>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Send message</button>
-          <p class="form-note">We’ll get back within 1 business day.</p>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Project image viewer">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
-    <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous image">←</button>
-    <img id="lightboxImg" alt="">
-    <button class="lightbox-nav next" id="lightboxNext" aria-label="Next image">→</button>
-  </div>
-
-  <!-- Back to top -->
-  <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <div class="brand-mini">
-          <span class="brand-logo" aria-hidden="true"></span>
-          <span><strong>EMBED IQ</strong></span>
-        </div>
-        <p>Embedded systems, digital circuits, CAD, mechanical design, testing, and soldering—delivered with care.</p>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <ul class="footer-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact  +91 6303557146</a></li>
-          <li><a href="#mail">MAIL embediqinnovations@gmail.com</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Services</h4>
-        <ul class="footer-links">
-          <li><a href="#services">Embedded Projects</a></li>
-          <li><a href="#services">Digital Circuit Design</a></li>
-          <li><a href="#services">CAD Works (Electrical)</a></li>
-          <li><a href="#services">Mechanical Design CAD</a></li>
-          <li><a href="#services">Testing & Validation</a></li>
-          <li><a href="#services">Soldering & Assembly</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Follow</h4>
-        <ul class="footer-links">
-          <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
-          <li><a href="#" aria-label="YouTube">YouTube</a></li>
-          <li><a href="#" aria-label="GitHub">GitHub</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© <span id="year"></span> EMBED IQ INNOVATIONS. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-  <script src="server.js"></script>
-</body>
-</html>
+/* Example Utility Classes */
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: .5rem !important; }
+.mb-1 { margin-bottom: .5rem !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-primary { color: var(--primary) !important; }
+.bg-primary { background: var(--primary) !important; }
+.rounded { border-radius: var(--border-radius) !important; }
+.shadow { box-shadow: var(--shadow) !important; }
+.w-full { width: 100% !important; }
+.max-w-sm { max-width: 480px !important; }
