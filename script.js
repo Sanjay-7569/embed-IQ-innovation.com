@@ -1,209 +1,293 @@
-// Helpers
-const $ = (sel, parent = document) => parent.querySelector(sel);
-const $$ = (sel, parent = document) => Array.from(parent.querySelectorAll(sel));
+// EMBED IQ INNOVATION - Main JS Logic
+// All features, all logic, functions separated and commented
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Year
-  const yearEl = $('#year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  // Mobile Nav
-  const navToggle = $('#navToggle');
-  const nav = $('#primaryNav');
-  navToggle?.addEventListener('click', () => {
-    const open = nav?.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+// ----------------------
+// 1. Responsive Navbar Toggle
+// ----------------------
+function initNavbarToggle() {
+  const navToggle = document.getElementById('navToggle');
+  const nav = document.getElementById('primaryNav');
+  navToggle.addEventListener('click', function () {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', !expanded);
+    nav.classList.toggle('open');
+    document.body.classList.toggle('nav-open');
   });
-
-  // Dropdowns (click + keyboard)
-  $$('.has-dropdown').forEach(dd => {
-    const toggle = $('.dropdown-toggle', dd);
-    toggle?.addEventListener('click', () => {
-      const isOpen = dd.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-
-    dd.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        dd.classList.remove('open');
-        toggle?.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
-
-  // Filter links in Projects dropdown
-  $$('.dropdown-link[data-filter]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const filter = link.getAttribute('data-filter');
-      filterGallery(filter);
-      // Close nav on mobile
-      nav?.classList.remove('open');
-      navToggle?.setAttribute('aria-expanded', 'false');
-      // Scroll to gallery
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  // Search
-  const searchForm = $('#searchForm');
-  const searchInput = $('#searchInput');
-  searchForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    performSearch(searchInput?.value || '');
-  });
-  searchInput?.addEventListener('input', (e) => {
-    performSearch(e.target.value);
-  });
-
-  // Lightbox
-  const lightbox = $('#lightbox');
-  const lightboxImg = $('#lightboxImg');
-  const lightboxClose = $('#lightboxClose');
-  const lightboxPrev = $('#lightboxPrev');
-  const lightboxNext = $('#lightboxNext');
-  const galleryItems = $$('.project-card img');
-  let currentIndex = -1;
-
-  function openLightbox(idx){
-    currentIndex = idx;
-    const img = galleryItems[currentIndex];
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-  }
-  function closeLightbox(){
-    lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden', 'true');
-  }
-  function prev(){ if (currentIndex <= 0) currentIndex = galleryItems.length; openLightbox((currentIndex - 1) % galleryItems.length); }
-  function next(){ openLightbox((currentIndex + 1) % galleryItems.length); }
-
-  galleryItems.forEach((img, idx) => {
-    img.addEventListener('click', () => openLightbox(idx));
-    const btn = img.closest('.project-card')?.querySelector('[data-lightbox]');
-    btn?.addEventListener('click', () => openLightbox(idx));
-  });
-
-  lightboxClose?.addEventListener('click', closeLightbox);
-  lightboxPrev?.addEventListener('click', prev);
-  lightboxNext?.addEventListener('click', next);
-  document.addEventListener('keydown', (e) => {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prev();
-    if (e.key === 'ArrowRight') next();
-  });
-  lightbox?.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  // Back to top
-  const backToTop = $('#backToTop');
-  const onScroll = () => {
-    if (window.scrollY > 600) backToTop?.classList.add('show'); else backToTop?.classList.remove('show');
-  };
-  window.addEventListener('scroll', onScroll);
-  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  // Contact form validation (client-side)
-  const contactForm = $('#contactForm');
-  contactForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const fields = ['name','email','subject','message'].map(id => ({ el: document.getElementById(id), error: document.querySelector(`#${id} + .error`) }));
-    let ok = true;
-
-    fields.forEach(({ el, error }) => {
-      const value = (el.value || '').trim();
-      let message = '';
-      if (!value) message = 'This field is required.';
-      if (el.id === 'email' && value){
-        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        if (!valid) message = 'Please enter a valid email.';
-      }
-      if (message){ ok = false; error.textContent = message; el.setAttribute('aria-invalid', 'true'); }
-      else { error.textContent = ''; el.removeAttribute('aria-invalid'); }
-    });
-
-    if (ok){
-      // Replace with your backend integration
-      alert('Thanks! Your message has been sent.');
-      contactForm.reset();
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 768) {
+      nav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('nav-open');
     }
   });
+}
 
-  // Utility: filter via category
-  function filterGallery(filter){
-    $$('.project-card').forEach(card => {
-      const cat = card.getAttribute('data-category');
-      const show = filter === 'all' || !filter ? true : (cat === filter);
-      card.style.display = show ? '' : 'none';
+// ----------------------
+// 2. Dropdown Menus (Services & Projects)
+// ----------------------
+function initDropdownMenus() {
+  document.querySelectorAll('.has-dropdown').forEach(drop => {
+    const toggle = drop.querySelector('.dropdown-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        document.querySelectorAll('.has-dropdown.open').forEach(d => {
+          if (d !== drop) d.classList.remove('open');
+        });
+        drop.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', drop.classList.contains('open'));
+      });
+    }
+  });
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.has-dropdown.open').forEach(drop => {
+      drop.classList.remove('open');
+      drop.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+// ----------------------
+// 3. Project Search (Client-Side Filter)
+// ----------------------
+function initProjectSearch() {
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('searchInput');
+  const gallery = document.getElementById('gallery');
+  if (searchForm && searchInput && gallery) {
+    searchForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const term = searchInput.value.trim().toLowerCase();
+      filterProjects(term);
     });
   }
-
-  // Utility: search by title/tags/alt
-  function performSearch(query){
-    const q = (query || '').toLowerCase();
-    $$('.project-card').forEach(card => {
+  function filterProjects(term) {
+    Array.from(gallery.children).forEach(card => {
       const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
       const tags = card.querySelector('.tags')?.textContent.toLowerCase() || '';
-      const alt = card.querySelector('img')?.alt.toLowerCase() || '';
-      const show = !q || title.includes(q) || tags.includes(q) || alt.includes(q);
-      card.style.display = show ? '' : 'none';
+      card.style.display = (!term || title.includes(term) || tags.includes(term)) ? '' : 'none';
     });
   }
-});
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+}
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-
-// POST route to handle form submission
-app.post('/contact', async (req, res) => {
-  const { name, email, subject, message } = req.body;
-
-  // Basic validation
-  if (!name || !email || !subject || !message) {
-    return res.status(400).json({ error: 'All fields are required.' });
+// ----------------------
+// 4. Projects Category Filter (Dropdown)
+// ----------------------
+function initProjectsDropdownFilter() {
+  const gallery = document.getElementById('gallery');
+  const projectDropdownLinks = document.querySelectorAll('[data-filter]');
+  projectDropdownLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      const cat = link.getAttribute('data-filter');
+      filterByCategory(cat);
+      projectDropdownLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+  function filterByCategory(cat) {
+    if (!gallery) return;
+    Array.from(gallery.children).forEach(card => {
+      const category = card.getAttribute('data-category');
+      card.style.display = (cat === 'all' || category === cat) ? '' : 'none';
+    });
   }
+}
 
-  try {
-    // Configure mail transporter (use your email credentials)
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'your-email@gmail.com',       // Replace with your email
-        pass: 'your-email-password'         // Replace with your email password or app password
+// ----------------------
+// 5. Lightbox Gallery Modal
+// ----------------------
+function initLightbox() {
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  let projectImages = [];
+  let currentImageIndex = 0;
+
+  function updateProjectImages() {
+    projectImages = Array.from(gallery.querySelectorAll('.project-card img'));
+  }
+  function showLightbox(idx) {
+    if (!projectImages[idx]) return;
+    lightboxImg.src = projectImages[idx].src;
+    lightboxImg.alt = projectImages[idx].alt;
+    lightbox.classList.add('show');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    currentImageIndex = idx;
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('show');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  if (gallery && lightbox && lightboxImg && lightboxClose && lightboxPrev && lightboxNext) {
+    updateProjectImages();
+    gallery.querySelectorAll('[data-lightbox]').forEach((btn, idx) => {
+      btn.addEventListener('click', function () {
+        updateProjectImages();
+        showLightbox(idx);
+      });
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) closeLightbox();
+    });
+    lightboxPrev.addEventListener('click', function () {
+      if (currentImageIndex > 0) showLightbox(currentImageIndex - 1);
+    });
+    lightboxNext.addEventListener('click', function () {
+      if (currentImageIndex < projectImages.length - 1) showLightbox(currentImageIndex + 1);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('show')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') lightboxPrev.click();
+      if (e.key === 'ArrowRight') lightboxNext.click();
+    });
+  }
+}
+
+// ----------------------
+// 6. Contact Form Validation & Submission
+// ----------------------
+function initContactForm() {
+  const contactForm = document.getElementById('contactForm');
+  if (!contactForm) return;
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    let valid = true;
+    contactForm.querySelectorAll('.form-field').forEach(field => {
+      const input = field.querySelector('input, textarea');
+      const errorSpan = field.querySelector('.error');
+      if (!input.checkValidity()) {
+        valid = false;
+        errorSpan.textContent = input.validationMessage;
+        input.classList.add('invalid');
+      } else {
+        errorSpan.textContent = '';
+        input.classList.remove('invalid');
       }
     });
+    if (valid) {
+      // Simulate sending, show success message, clear form
+      contactForm.reset();
+      alert('Thank you! We’ll get back within 1 business day.');
+    }
+  });
+}
 
-    // Email content
-    const mailOptions = {
-      from: email,
-      to: 'your-email@gmail.com',          // Where you want to receive the message
-      subject: `Contact Form: ${subject}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    };
+// ----------------------
+// 7. Back to Top Button
+// ----------------------
+function initBackToTop() {
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', function () {
+    if (window.scrollY > 320) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  });
+  backToTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
-    // Send email
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'Message sent successfully!' });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ error: 'Failed to send message.' });
+// ----------------------
+// 8. Footer Year (Dynamic)
+// ----------------------
+function setFooterYear() {
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
   }
-});
+}
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// ----------------------
+// 9. Accessibility: Keyboard Focus
+// ----------------------
+function enhanceAccessibility() {
+  document.querySelectorAll('button, a, input, textarea').forEach(el => {
+    el.addEventListener('keyup', function (e) {
+      if (e.key === 'Tab') el.classList.add('tabbed');
+    });
+    el.addEventListener('blur', function () {
+      el.classList.remove('tabbed');
+    });
+  });
+}
 
+// ----------------------
+// 10. Smooth Scroll for Anchor Links
+// ----------------------
+function initSmoothScroll() {
+  document.querySelectorAll('.nav-link, .footer-links a').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          window.scrollTo({ top: target.offsetTop - 64, behavior: 'smooth' });
+        }
+        // Close mobile nav after click
+        const nav = document.getElementById('primaryNav');
+        const navToggle = document.getElementById('navToggle');
+        nav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
+      }
+    });
+  });
+}
+
+// ----------------------
+// 11. Animate Cards on Scroll (Fade-in)
+// ----------------------
+function animateCardsOnScroll() {
+  const observerOptions = { threshold: 0.1 };
+  const fadeInElements = document.querySelectorAll('.card, .project-card, .why-card, .stats, .contact-form');
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+  fadeInElements.forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(32px)';
+    observer.observe(el);
+  });
+}
+
+// ----------------------
+// 12. Page Initialization
+// ----------------------
+function initEmbedIQSite() {
+  initNavbarToggle();
+  initDropdownMenus();
+  initProjectSearch();
+  initProjectsDropdownFilter();
+  initLightbox();
+  initContactForm();
+  initBackToTop();
+  setFooterYear();
+  enhanceAccessibility();
+  initSmoothScroll();
+  animateCardsOnScroll();
+}
+
+// ----------------------
+// 13. DOM Ready
+// ----------------------
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEmbedIQSite);
+} else {
+  initEmbedIQSite();
+}
