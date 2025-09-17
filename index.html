@@ -512,42 +512,34 @@
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="container">
-      <header class="section-header">
-        <h2>Contact us</h2>
-        <p>Have a project in mind? Let’s talk.</p>
-      </header>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="form-grid">
-          <div class="form-field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" required>
-            <span class="error" aria-live="polite"></span>
-          </div>
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required>
-            <span class="error" aria-live="polite"></span>
-          </div>
-          <div class="form-field">
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text" placeholder="How can we help?" required>
-            <span class="error" aria-live="polite"></span>
-          </div>
-          <div class="form-field form-field-full">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" placeholder="Describe your project or question..." required></textarea>
-            <span class="error" aria-live="polite"></span>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Send message</button>
-          <p class="form-note">We’ll get back within 1 business day.</p>
-        </div>
-      </form>
+ <form class="contact-form" id="contactForm" action="https://formspree.io/f/{your_form_id}" method="POST">
+  <div class="form-grid">
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required>
+      <span class="error" aria-live="polite"></span>
     </div>
-  </section>
+    <div class="form-field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com" required>
+      <span class="error" aria-live="polite"></span>
+    </div>
+    <div class="form-field">
+      <label for="subject">Subject</label>
+      <input id="subject" name="subject" type="text" placeholder="How can we help?" required>
+      <span class="error" aria-live="polite"></span>
+    </div>
+    <div class="form-field form-field-full">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="6" placeholder="Describe your project or question..." required></textarea>
+      <span class="error" aria-live="polite"></span>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Send message</button>
+    <p class="form-note">We’ll get back within 1 business day.</p>
+  </div>
+</form>
 
   <!-- Lightbox Modal -->
   <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Project image viewer">
@@ -609,3 +601,4 @@
   <script src="server.js"></script>
 </body>
 </html>
+
